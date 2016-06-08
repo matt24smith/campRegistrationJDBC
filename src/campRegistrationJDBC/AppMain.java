@@ -1,3 +1,11 @@
+/**
+ * AUTHOR: 			Matt Smith (with help from tutorial cited below)
+ * DESIGNED FOR:	CKEC
+ * DATE:			2016-06-06
+ * PURPOSE:			a JDBC to connect to MySQL Camps Database
+ */
+
+
 package campRegistrationJDBC;
 
 import java.awt.FlowLayout;

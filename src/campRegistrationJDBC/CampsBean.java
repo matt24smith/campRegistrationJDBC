@@ -1,3 +1,10 @@
+/**
+ * AUTHOR: 			Matt Smith (with help from tutorial cited below)
+ * DESIGNED FOR:	CKEC
+ * DATE:			2016-06-06
+ * PURPOSE:			a JDBC to connect to MySQL Camps Database
+ */
+
 package campRegistrationJDBC;
 
 import java.sql.Date;
@@ -8,12 +15,11 @@ import javax.sql.rowset.*;
 
 public class CampsBean {
 	
-	/** It should be noted that the following class was
+	/* It should be noted that the following class was
 	 * completed using a tutorial online as a template.
 	 * The tutorial can be found at the following URL:
 	 * 
 	 * http://www.developer.com/java/creating-a-jdbc-gui-application.html
-	 * 
 	 */
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -109,7 +115,7 @@ public class CampsBean {
 
 		try {
 			rowSet.first();
-			c.setId(rowSet.getInt("id"));
+			//c.setId(rowSet.getInt("id"));
 			c.setName(rowSet.getString("name"));
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));

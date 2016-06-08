@@ -1,3 +1,11 @@
+/**
+ * AUTHOR: 			Matt Smith (with help from tutorial cited below)
+ * DESIGNED FOR:	CKEC
+ * DATE:			2016-06-06
+ * PURPOSE:			a JDBC to connect to MySQL Camps Database
+ */
+
+
 package campRegistrationJDBC;
 
 import java.awt.BorderLayout;
@@ -18,13 +26,17 @@ import net.miginfocom.swing.MigLayout;
 
 public class CampsUI extends JPanel {
 
-	/*
+	/* It should be noted that the following class was
+	 * completed using a tutorial online as a template.
+	 * The tutorial can be found at the following URL:
+	 * 
 	 * http://www.developer.com/java/creating-a-jdbc-gui-application.html
 	 */
 	
 	//private DateFormat format = new SimpleDateFormat("YYYY/MM/DD");
 	
 	
+	private static final long serialVersionUID = 1L;
 	private JTextField idField = new JTextField(11);
 	private JTextField nameField = new JTextField(30);
 	private JTextField priceWeekly = new JTextField(10);
