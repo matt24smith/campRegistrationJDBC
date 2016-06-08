@@ -10,7 +10,7 @@ public class Camps {
 	private double	priceHalfDay;
 	private Date	startDate;
 	private Date	endDate;
-	private int camper_id;
+	private int 	camper_id;
 	/**
 	 * @return the id
 	 */

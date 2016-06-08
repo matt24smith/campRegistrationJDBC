@@ -44,7 +44,7 @@ public class CampsUI extends JPanel {
 	private JTextField priceHalfDay = new JTextField(10);
 	//private JFormattedTextField startDate = new JFormattedTextField(format);
 	//private JFormattedTextField endDate = new JFormattedTextField(format);
-	private JTextField camper_id = new JTextField(11);
+	//private JTextField camper_id = new JTextField(11);
 	
 	private JButton createButton = new JButton ("New");
 	private JButton updateButton = new JButton ("Update");
@@ -100,8 +100,8 @@ public class CampsUI extends JPanel {
 	      panel.add(nameField, "wrap");
 	      
 	      panel.add(new JLabel("Price Weekly"), "align label");
-	      panel.add(priceWeekly, "wrap")
-	      ;panel.add(new JLabel("Price Daily"), "align label");
+	      panel.add(priceWeekly, "wrap");
+	      panel.add(new JLabel("Price Daily"), "align label");
 	      panel.add(priceDaily, "wrap");
 	      panel.add(new JLabel("Price Half Day"), "align label");
 	      panel.add(priceHalfDay, "wrap");
@@ -109,9 +109,9 @@ public class CampsUI extends JPanel {
 	      //panel.add(startDate, "wrap");
 	      //panel.add(new JLabel("End Date"), "align label");
 	      //panel.add(endDate, "wrap");
-	      panel.add(new JLabel("Camper ID"), "align label");
-	      panel.add(camper_id, "wrap");
-	      camper_id.setEnabled(false);
+	      //panel.add(new JLabel("Camper ID"), "align label");
+	      //panel.add(camper_id, "wrap");
+	      //camper_id.setEnabled(false);
 	      
 	      return panel;
 	}
@@ -126,7 +126,7 @@ public class CampsUI extends JPanel {
 	      //c.setStartDate(Camps.getStartDate());
 	      //c.setEndDate(fhkssdh);
 	      
-	      c.setCamper_id(Integer.parseInt(camper_id.getText()));
+	      //c.setCamper_id(Integer.parseInt(camper_id.getText()));
 	      
 	      return c;
 	   }
@@ -139,7 +139,7 @@ public class CampsUI extends JPanel {
 	      priceHalfDay.setText(String.valueOf(c.getPriceHalfDay()));
 	      //start date
 	      //end date
-	      camper_id.setText(String.valueOf(c.getCamper_id()));
+	      //camper_id.setText(String.valueOf(c.getCamper_id()));
 	   }
 
 	private boolean isEmptyFieldData() {
@@ -149,7 +149,8 @@ public class CampsUI extends JPanel {
 	         && priceHalfDay.getText().trim().isEmpty()
 	         // start date
 	         // end date
-	         && camper_id.getText().trim().isEmpty());
+	         //&& camper_id.getText().trim().isEmpty())
+	         );
 	   }
 	
 	private class ButtonHandler implements ActionListener {
@@ -175,7 +176,7 @@ public class CampsUI extends JPanel {
 	            c.setPriceWeekly(150);
 	            c.setPriceDaily(32);
 	            c.setPriceHalfDay(20);
-	            c.setCamper_id(new Random().nextInt(Integer.MAX_VALUE + 1));
+	            //c.setCamper_id(new Random().nextInt(Integer.MAX_VALUE + 1));
 	            setFieldData(c);
 	            createButton.setText("Save");
 	            break;
