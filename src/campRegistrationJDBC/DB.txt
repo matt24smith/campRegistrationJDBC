@@ -1,0 +1,32 @@
+CREATE TABLE camps (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+name VARCHAR(60) NOT NULL, 
+priceWeekly DECIMAL(6,2),
+priceDaily DECIMAL(6,2),
+priceHalfDay DECIMAL(6,2),
+startDate DATE,
+endDate DATE
+);
+
+CREATE TABLE campers (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+fname VARCHAR(30),
+lname VARCHAR(30),
+lunchesOrdered INT(3),
+registrationDate DATE,
+amountPaid DECIMAL(6,2)
+);
+
+CREATE TABLE parents (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+fname VARCHAR(30),
+lname VARCHAR(30),
+phoneNumber VARCHAR(11),
+email VARCHAR(128)
+);
+
+CREATE TABLE camps2campers(
+campId VARCHAR(6) NOT NULL DEFAULT "",
+camperId VARCHAR(6) NOT NULL DEFAULT "",
+CONSTRAINT pk_camps2campers PRIMARY KEY (campId,camperId)
+);
