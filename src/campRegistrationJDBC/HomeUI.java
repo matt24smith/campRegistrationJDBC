@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +14,10 @@ import javax.swing.border.TitledBorder;
 
 public class HomeUI extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7134088989601804348L;
 	private JButton newCamper = new JButton ("New Camper");
 	private JButton newCamp = new JButton ("New Camp");
 
@@ -41,22 +44,6 @@ public class HomeUI extends JPanel{
 		return panel;
 	}
 
-	private Object initFields() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void setLayout(BorderLayout borderLayout) {
-
-		//TODO make this stuff
-
-	}
-
-	private void setBorder(TitledBorder titledBorder) {
-
-		//TODO this stuff also 
-	}
-
 	private class ButtonHandler implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -69,7 +56,7 @@ public class HomeUI extends JPanel{
 				//w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				w.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
 				w.getContentPane().add(new CampsUI());
-				w.setSize(600, 280);
+				w.setSize(600, 300);
 				w.setVisible(true);
 
 				break;
@@ -77,7 +64,7 @@ public class HomeUI extends JPanel{
 				JFrame q=new JFrame();
 				//do not exit on close
 				//q.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				q.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+				//q.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
 
 				// TODO fix this when campersUI is done
 

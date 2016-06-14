@@ -9,11 +9,10 @@ package campRegistrationJDBC;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.ZoneId;
 
-import com.sun.rowset.*;
+import javax.sql.rowset.JdbcRowSet;
 
-import javax.sql.rowset.*;
+import com.sun.rowset.JdbcRowSetImpl;
 
 public class CampsBean {
 
@@ -123,7 +122,7 @@ public class CampsBean {
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
 			c.setPriceHalfDay(rowSet.getDouble("priceHalfDay"));
 			
-			Date date = (Date) Date.from(c.startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			//Date date = (Date) Date.from(c.startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 			
 			//c.setStartDate(rowSet.getDate(date));
 			c.setEndDate(rowSet.getDate("endDate"));

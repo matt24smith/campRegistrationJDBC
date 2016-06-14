@@ -12,17 +12,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.Random;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,9 +27,6 @@ import javax.swing.text.DateFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-import org.jdatepicker.JDatePanel;
-import org.jdatepicker.JDatePicker;
-import org.jdatepicker.impl.*;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -50,26 +40,26 @@ public class CampsUI extends JPanel {
 	 */
 
 	//private AbstractFormatter format = new JFormattedTextField();
+	
+	/*
 	private JFormattedTextField.AbstractFormatter format =  new JFormattedTextField.AbstractFormatter() {
 
-		/**
-		 * 
-		 */
+		/*
 		private static final long serialVersionUID = 2L;
 
 		@Override
 		public String valueToString(Object value) throws ParseException {
-			// TODO Auto-generated method stub
+			// Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public Object stringToValue(String text) throws ParseException {
-			// TODO Auto-generated method stub
+			// Auto-generated method stub
 			return null;
 		}
 	};
-
+		*/
 	private JDatePickerImpl startDatePicker;
 	private JDatePickerImpl endDatePicker;
 
@@ -80,7 +70,7 @@ public class CampsUI extends JPanel {
 	private JTextField priceDaily = new JTextField(10);
 	private JTextField priceHalfDay = new JTextField(10);
 
-	//Add start and end date 
+	//TODO Add start and end date 
 	//private Date startDate = new Date(1, 1, 1);
 	//private JFormattedTextField endDate = new JFormattedTextField(format);
 	//private JTextField camper_id = new JTextField(11);
