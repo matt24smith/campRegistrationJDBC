@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class HomeUI {
+public class HomeUI extends JPanel{
 
 	private JButton newCamper = new JButton ("New Camper");
 	private JButton newCamp = new JButton ("New Camp");
@@ -23,13 +23,13 @@ public class HomeUI {
 		setBorder(new TitledBorder
 				(new EtchedBorder(),"Creative Kids Camp Database"));
 		setLayout(new BorderLayout(5, 5));
-		add(initFields(), BorderLayout.NORTH);
+		//add(initFields(), BorderLayout.NORTH);
 		add(initButtons(), BorderLayout.CENTER);
-		setFieldData(bean.moveFirst());
+		//setFieldData(bean.moveFirst());
 
 	}
 
-	private Object initButtons() {
+	private JPanel initButtons() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
 
@@ -37,6 +37,8 @@ public class HomeUI {
 		newCamper.addActionListener(new ButtonHandler());
 		panel.add(newCamp);
 		newCamp.addActionListener(new ButtonHandler());
+
+		return panel;
 	}
 
 	private Object initFields() {
@@ -45,8 +47,8 @@ public class HomeUI {
 	}
 
 	private void setLayout(BorderLayout borderLayout) {
-	
-	//TODO make this stuff
+
+		//TODO make this stuff
 
 	}
 
@@ -63,7 +65,8 @@ public class HomeUI {
 			case "New Camp":
 
 				JFrame w=new JFrame();
-				w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				//do not exit on close
+				//w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				w.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
 				w.getContentPane().add(new CampsUI());
 				w.setSize(600, 280);
@@ -72,14 +75,15 @@ public class HomeUI {
 				break;
 			case "New Camper":
 				JFrame q=new JFrame();
-				q.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				//do not exit on close
+				//q.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				q.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
-				
+
 				// TODO fix this when campersUI is done
-				
+
 				//q.getContentPane().add(new CampersUI());
-				
-				
+
+
 				q.setSize(600, 280);
 				q.setVisible(true);
 				break;
@@ -90,3 +94,4 @@ public class HomeUI {
 		}
 
 	}
+}
