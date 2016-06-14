@@ -17,7 +17,7 @@ public class AppMain {
 	      JFrame f=new JFrame();
 	      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	      f.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
-	      f.getContentPane().add(new CampsUI());
+	      f.getContentPane().add(new HomeUI());
 	      f.setSize(600, 280);
 	      f.setVisible(true);
 	   }

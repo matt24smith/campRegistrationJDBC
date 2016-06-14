@@ -12,15 +12,31 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DateFormatter;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import org.jdatepicker.JDatePanel;
+import org.jdatepicker.JDatePicker;
+import org.jdatepicker.impl.*;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -33,8 +49,29 @@ public class CampsUI extends JPanel {
 	 * http://www.developer.com/java/creating-a-jdbc-gui-application.html
 	 */
 	
-	//private DateFormat format = new SimpleDateFormat("YYYY/MM/DD");
+	//private AbstractFormatter format = new JFormattedTextField();
+	private JFormattedTextField.AbstractFormatter format =  new JFormattedTextField.AbstractFormatter() {
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2L;
+
+		@Override
+		public String valueToString(Object value) throws ParseException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public Object stringToValue(String text) throws ParseException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	};
 	
+	private JDatePickerImpl startDatePicker;
+	private JDatePickerImpl endDatePicker;
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField idField = new JTextField(11);
@@ -42,7 +79,9 @@ public class CampsUI extends JPanel {
 	private JTextField priceWeekly = new JTextField(10);
 	private JTextField priceDaily = new JTextField(10);
 	private JTextField priceHalfDay = new JTextField(10);
-	//private JFormattedTextField startDate = new JFormattedTextField(format);
+	
+	//Add start and end date 
+	//private Date startDate = new Date(1, 1, 1);
 	//private JFormattedTextField endDate = new JFormattedTextField(format);
 	//private JTextField camper_id = new JTextField(11);
 	
@@ -86,6 +125,7 @@ public class CampsUI extends JPanel {
 	      nextButton.addActionListener(new ButtonHandler());
 	      panel.add(lastButton);
 	      lastButton.addActionListener(new ButtonHandler());
+	      
 	      return panel;
 	}
 	
@@ -105,13 +145,27 @@ public class CampsUI extends JPanel {
 	      panel.add(priceDaily, "wrap");
 	      panel.add(new JLabel("Price Half Day"), "align label");
 	      panel.add(priceHalfDay, "wrap");
-	      //panel.add(new JLabel("Start Date"), "align label");
-	      //panel.add(startDate, "wrap");
-	      //panel.add(new JLabel("End Date"), "align label");
-	      //panel.add(endDate, "wrap");
-	      //panel.add(new JLabel("Camper ID"), "align label");
-	      //panel.add(camper_id, "wrap");
-	      //camper_id.setEnabled(false);
+	      
+	      
+	      UtilDateModel model=new UtilDateModel();
+	      Properties p = new Properties();
+	      p.put("text.today", "Today");
+	      p.put("text.month", "Month");
+	      p.put("text.year", "Year");
+	      JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+	      
+	      startDatePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+	      startDatePicker.setBounds(220,350,120,30);
+
+	      panel.add(new JLabel("Start Date"), "align label");
+	      panel.add(startDatePicker);
+	      
+	      endDatePicker = new JDatePickerImpl(datePanel, new DateFormatter());
+	      endDatePicker.setBounds(220,350,120,30);
+	      
+	      panel.add(new JLabel(""), "wrap"); // this is a workaround, not a feature
+	      panel.add(new JLabel("End Date"), "align label");
+	      panel.add(endDatePicker);
 	      
 	      return panel;
 	}
@@ -123,7 +177,7 @@ public class CampsUI extends JPanel {
 	      c.setPriceWeekly(Double.parseDouble(priceWeekly.getText()));
 	      c.setPriceDaily(Double.parseDouble(priceDaily.getText()));
 	      c.setPriceHalfDay(Double.parseDouble(priceHalfDay.getText()));
-	      //c.setStartDate(Camps.getStartDate());
+	      //c.setStartDate(startDate);
 	      //c.setEndDate(fhkssdh);
 	      
 	      //c.setCamper_id(Integer.parseInt(camper_id.getText()));
@@ -137,6 +191,7 @@ public class CampsUI extends JPanel {
 	      priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
 	      priceDaily.setText(String.valueOf(c.getPriceDaily()));
 	      priceHalfDay.setText(String.valueOf(c.getPriceHalfDay()));
+	      //startDate.setDateFormat((Date) c.getStartDate());
 	      //start date
 	      //end date
 	      //camper_id.setText(String.valueOf(c.getCamper_id()));
@@ -169,7 +224,7 @@ public class CampsUI extends JPanel {
 	               "New person created successfully.");
 	               createButton.setText("New...");
 	               break;
-	         case "New...":
+	         case "New":
 	            c.setId(new Random()
 	            .nextInt(Integer.MAX_VALUE) + 1);
 	            c.setName("");
@@ -204,13 +259,13 @@ public class CampsUI extends JPanel {
 	               + String.valueOf(c.getId()
 	               + " is deleted successfully"));
 	               break;
-	         case "First":
+	         case "<-- First":
 	            setFieldData(bean.moveFirst()); break;
-	         case "Previous":
+	         case "<- Previous":
 	            setFieldData(bean.movePrevious()); break;
-	         case "Next":
+	         case "Next ->":
 	            setFieldData(bean.moveNext()); break;
-	         case "Last":
+	         case "Last -->":
 	            setFieldData(bean.moveLast()); break;
 	         default:
 	            JOptionPane.showMessageDialog(null,

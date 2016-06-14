@@ -9,19 +9,21 @@ package campRegistrationJDBC;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.ZoneId;
+
 import com.sun.rowset.*;
 
 import javax.sql.rowset.*;
 
 public class CampsBean {
-	
+
 	/* It should be noted that the following class was
 	 * completed using a tutorial online as a template.
 	 * The tutorial can be found at the following URL:
 	 * 
 	 * http://www.developer.com/java/creating-a-jdbc-gui-application.html
 	 */
-	
+
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL =
 			"jdbc:mysql://localhost:3306/camp_registration";
@@ -56,7 +58,7 @@ public class CampsBean {
 			rowSet.updateDouble("priceWeekly", c.getPriceWeekly());
 			rowSet.updateDouble("priceDaily", c.getPriceDaily());
 			rowSet.updateDouble("priceHalfDay", c.getPriceHalfDay());
-			rowSet.updateDate("startDate", (Date) c.getStartDate());
+			//rowSet.updateDate("startDate", (Date) c.getStartDate());
 			rowSet.updateDate("endDate", (Date) c.getEndDate());
 			//rowSet.updateInt("camper_id", c.getCamper_id());
 			rowSet.insertRow();
@@ -84,7 +86,7 @@ public class CampsBean {
 			rowSet.updateDouble("priceWeekly", c.getPriceWeekly());
 			rowSet.updateDouble("priceDaily", c.getPriceDaily());
 			rowSet.updateDouble("priceHalfDay", c.getPriceHalfDay());
-			rowSet.updateDate("startDate", (Date) c.getStartDate());
+			rowSet.updateString("startDate", c.sdf.format(c.getStartDate()));
 			rowSet.updateDate("endDate", (Date) c.getEndDate());
 			//rowSet.updateInt("camper_id", c.getCamper_id());
 		} catch (SQLException ex) {
@@ -120,7 +122,10 @@ public class CampsBean {
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
 			c.setPriceHalfDay(rowSet.getDouble("priceHalfDay"));
-			c.setStartDate(rowSet.getDate("startDate"));
+			
+			Date date = (Date) Date.from(c.startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			
+			//c.setStartDate(rowSet.getDate(date));
 			c.setEndDate(rowSet.getDate("endDate"));
 			//c.setCamper_id(rowSet.getInt("camper_id"));
 
@@ -139,7 +144,7 @@ public class CampsBean {
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
 			c.setPriceHalfDay(rowSet.getDouble("priceHalfDay"));
-			c.setStartDate(rowSet.getDate("startDate"));
+			//c.setStartDate(rowSet.getDate("startDate"));
 			c.setEndDate(rowSet.getDate("endDate"));
 			//c.setCamper_id(rowSet.getInt("camper_id"));
 
@@ -159,7 +164,7 @@ public class CampsBean {
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
 			c.setPriceHalfDay(rowSet.getDouble("priceHalfDay"));
-			c.setStartDate(rowSet.getDate("startDate"));
+			//c.setStartDate(rowSet.getDate("startDate"));
 			c.setEndDate(rowSet.getDate("endDate"));
 			//c.setCamper_id(rowSet.getInt("camper_id"));
 
@@ -179,7 +184,7 @@ public class CampsBean {
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
 			c.setPriceHalfDay(rowSet.getDouble("priceHalfDay"));
-			c.setStartDate(rowSet.getDate("startDate"));
+			//c.setStartDate(rowSet.getDate("startDate"));
 			c.setEndDate(rowSet.getDate("endDate"));
 			//c.setCamper_id(rowSet.getInt("camper_id"));
 
@@ -198,7 +203,7 @@ public class CampsBean {
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
 			c.setPriceHalfDay(rowSet.getDouble("priceHalfDay"));
-			c.setStartDate(rowSet.getDate("startDate"));
+			//c.setStartDate(rowSet.getDate("startDate"));
 			c.setEndDate(rowSet.getDate("endDate"));
 			//c.setCamper_id(rowSet.getInt("camper_id"));
 		} catch (SQLException ex) {

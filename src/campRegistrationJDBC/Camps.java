@@ -1,5 +1,8 @@
 package campRegistrationJDBC;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Camps {
@@ -8,9 +11,14 @@ public class Camps {
 	private double	priceWeekly;
 	private double	priceDaily;
 	private double	priceHalfDay;
-	private Date	startDate;
+	LocalDate	startDate;
 	private Date	endDate;
 	private int 	camper_id;
+	
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	
 	/**
 	 * @return the id
 	 */
@@ -74,14 +82,14 @@ public class Camps {
 	/**
 	 * @return the startDate
 	 */
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 	/**
-	 * @param startDate the startDate to set
+	 * @param dateFormat the startDate to set
 	 */
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStartDate(LocalDate date) {
+		this.startDate = date;
 	}
 	/**
 	 * @return the endDate
