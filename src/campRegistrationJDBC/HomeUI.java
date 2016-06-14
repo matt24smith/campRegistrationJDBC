@@ -14,9 +14,6 @@ import javax.swing.border.TitledBorder;
 
 public class HomeUI extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7134088989601804348L;
 	private JButton newCamper = new JButton ("New Camper");
 	private JButton newCamp = new JButton ("New Camp");
