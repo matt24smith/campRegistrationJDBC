@@ -9,7 +9,7 @@ public class Camps {
 	private double	priceWeekly;
 	private double	priceDaily;
 	private double	priceHalfDay;
-	private java.sql.Date	startDate;
+	private Date	startDate;
 	private Date	endDate;
 	private int 	camper_id;
 	
@@ -80,13 +80,13 @@ public class Camps {
 	/**
 	 * @return the startDate
 	 */
-	public java.sql.Date getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 	/**
 	 * @param dateFormat the startDate to set
 	 */
-	public void setStartDate(java.sql.Date selectedStartDate) {
+	public void setStartDate(Date selectedStartDate) {
 		this.startDate = selectedStartDate;
 	}
 	/**

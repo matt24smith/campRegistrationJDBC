@@ -12,9 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
@@ -25,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.DateFormatter;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -42,15 +39,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	 * http://www.developer.com/java/creating-a-jdbc-gui-application.html
 	 */
 
-	private JDatePanelImpl 	startDatePanel;
-	private JDatePanelImpl	endDatePanel;
-	private JDatePickerImpl startDatePicker;
-	private JDatePickerImpl endDatePicker;
-	
-	UtilDateModel model=new UtilDateModel();
-	DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-	
-	//JLabel startCheckDate; JButton startCheck;
+
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField idField = new JTextField(11);
@@ -60,7 +49,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	private JTextField priceHalfDay = new JTextField(10);
 
 	//TODO Add start and end date 
-	//private Date startDate = new Date(1, 1, 1);
+	private Date startDate = new Date();
 	//private JFormattedTextField endDate = new JFormattedTextField(format);
 	//private JTextField camper_id = new JTextField(11);
 
@@ -74,6 +63,16 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private CampsBean bean = new CampsBean();
 
+	UtilDateModel model; 
+	Properties p;
+	/*
+	p.put("text.today", "Today");
+	p.put("text.month", "Month");
+	p.put("text.year", "Year");
+	*/
+	JDatePanelImpl datePanel; 
+	JDatePickerImpl datePicker;
+	
 	public CampsUI()
 	{
 		setBorder(new TitledBorder
@@ -126,25 +125,16 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		panel.add(priceHalfDay, "wrap");
 
 
-		
-		Properties p = new Properties();
+		model = new UtilDateModel();
+		p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
+		datePanel = new JDatePanelImpl(model, p);
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		
-		model = new UtilDateModel();
-		startDatePanel = new JDatePanelImpl(model, p);
-		startDatePicker = new JDatePickerImpl(startDatePanel, new DateLabelFormatter());
-		
-		//startCheck = new JButton("Check:");
-		//startCheck.addActionListener(this);
-		
-		startDatePicker = new JDatePickerImpl(startDatePanel, new DateFormatter());
-		startDatePicker.setBounds(220,350,120,30);
-
 		panel.add(new JLabel("Start Date"), "align label");
-		panel.add(startDatePicker);
-		//panel.add(startCheck);
+		panel.add(datePicker);
 
 		//endDatePicker = new JDatePickerImpl(datePanel, new DateFormatter());
 		//endDatePicker.setBounds(220,350,120,30);
@@ -166,12 +156,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		c.setPriceHalfDay(Double.parseDouble(priceHalfDay.getText()));
 		
 		//TODO add start and end dates
-		Date selectedStartDate = (Date) startDatePicker.getModel().getValue();
-		c.setStartDate(selectedStartDate);
-		//commented and moved to top
-		//DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		String reportStartDate = df.format(selectedStartDate);
-		JOptionPane.showMessageDialog(null, reportStartDate);
+		c.setStartDate((Date)datePicker.getModel().getValue());
+		this.startDate = (Date)datePicker.getModel().getValue();
 		
 		//c.setEndDate(fhkssdh);
 
