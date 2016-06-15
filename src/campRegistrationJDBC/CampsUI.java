@@ -42,12 +42,14 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	
 	private static final long serialVersionUID = 1L;
+	//textfield declarations
 	private JTextField idField = new JTextField(11);
 	private JTextField nameField = new JTextField(30);
 	private JTextField priceWeekly = new JTextField(10);
 	private JTextField priceDaily = new JTextField(10);
 	private JTextField priceHalfDay = new JTextField(10);
 
+	//button declarations
 	private JButton createButton = new JButton ("New");
 	private JButton updateButton = new JButton ("Update");
 	private JButton deleteButton = new JButton ("Delete");
@@ -58,13 +60,10 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private CampsBean bean = new CampsBean();
 
+	//declarations for datepicker
 	UtilDateModel model, endModel; 
 	Properties p, endp;
-	/*
-	p.put("text.today", "Today");
-	p.put("text.month", "Month");
-	p.put("text.year", "Year");
-	*/
+	
 	JDatePanelImpl datePanel; 
 	JDatePickerImpl datePicker;
 	JDatePanelImpl endDatePanel; 
@@ -82,6 +81,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private JPanel initButtons()
 	{
+		//initializes the buttons on the screen
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
 
@@ -106,6 +107,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private JPanel initFields()
 	{
+		//initializes any sort of input field, including date pickers
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		panel.add(new JLabel("ID"), "align label");
@@ -123,9 +126,9 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 
 		model = new UtilDateModel();
-		endModel = new UtilDateModel();
+		endModel = new UtilDateModel();	//second one is for the end date picker
 		p = new Properties();
-		endp = new Properties();
+		endp = new Properties();		// ^
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
@@ -147,6 +150,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	}
 
 	private Camps getFieldData() {
+		//the method names are pretty self descriptive. 
+		
 		Camps c = new Camps();
 		c.setId(Integer.parseInt(idField.getText()));
 		c.setName(nameField.getText());
@@ -162,6 +167,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	}
 
 	private void setFieldData(Camps c) {
+		// ... yup
 		idField.setText(String.valueOf(	String.valueOf(c.getId())	));
 		nameField.setText(c.getName());
 		priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
@@ -170,17 +176,18 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	}
 
 	private boolean isEmptyFieldData() {
+		// is it empty?
+		
 		return (nameField.getText().trim().isEmpty()
 				&& priceWeekly.getText().trim().isEmpty()
 				&& priceDaily.getText().trim().isEmpty()
 				&& priceHalfDay.getText().trim().isEmpty()
-				// start date
-				// end date
-				//&& camper_id.getText().trim().isEmpty())
 				);
 	}
 
 	private class ButtonHandler implements ActionListener {
+		// BUTTONS!
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Camps c = getFieldData();
@@ -203,7 +210,6 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				c.setPriceWeekly(150);
 				c.setPriceDaily(32);
 				c.setPriceHalfDay(20);
-				//c.setCamper_id(new Random().nextInt(Integer.MAX_VALUE + 1));
 				setFieldData(c);
 				createButton.setText("Save");
 				break;

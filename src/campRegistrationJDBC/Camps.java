@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Camps {
-	private int id;
+	private int 	id;
 	private String 	name;
 	private double	priceWeekly;
 	private double	priceDaily;

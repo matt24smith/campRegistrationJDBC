@@ -48,8 +48,10 @@ public class CampsBean {
 
 	public Camps create (Camps c) 
 	{
+		// interacts with DB to create a new record under camps table
 		try 
 		{
+			
 			rowSet.moveToInsertRow();
 			rowSet.updateInt("id", c.getId());
 			rowSet.updateString("name", c.getName());
@@ -79,6 +81,7 @@ public class CampsBean {
 
 	public Camps update (Camps c)
 	{
+		//updates a record
 		try {
 			rowSet.updateInt("id", c.getId());
 			rowSet.updateString("name", c.getName());
@@ -102,6 +105,7 @@ public class CampsBean {
 	}
 
 	public void delete(){
+		//deletes a record
 		try {
 			rowSet.moveToCurrentRow();
 			rowSet.deleteRow();
