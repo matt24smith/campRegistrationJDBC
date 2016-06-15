@@ -12,9 +12,10 @@ CREATE TABLE campers (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 fname VARCHAR(30),
 lname VARCHAR(30),
-lunchesOrdered INT(3),
+lunchesOrdered INT(3) NOT NULL DEFAULT 0,
 registrationDate DATE,
-amountPaid DECIMAL(6,2)
+amountPaid DECIMAL(6,2),
+notes VARCHAR(2000)
 );
 
 CREATE TABLE parents (
