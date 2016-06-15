@@ -48,11 +48,6 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	private JTextField priceDaily = new JTextField(10);
 	private JTextField priceHalfDay = new JTextField(10);
 
-	//TODO Add start and end date 
-	private Date startDate = new Date();
-	//private JFormattedTextField endDate = new JFormattedTextField(format);
-	//private JTextField camper_id = new JTextField(11);
-
 	private JButton createButton = new JButton ("New");
 	private JButton updateButton = new JButton ("Update");
 	private JButton deleteButton = new JButton ("Delete");
@@ -63,8 +58,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private CampsBean bean = new CampsBean();
 
-	UtilDateModel model; 
-	Properties p;
+	UtilDateModel model, endModel; 
+	Properties p, endp;
 	/*
 	p.put("text.today", "Today");
 	p.put("text.month", "Month");
@@ -72,6 +67,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	*/
 	JDatePanelImpl datePanel; 
 	JDatePickerImpl datePicker;
+	JDatePanelImpl endDatePanel; 
+	JDatePickerImpl endDatePicker;
 	
 	public CampsUI()
 	{
@@ -126,23 +123,25 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 
 		model = new UtilDateModel();
+		endModel = new UtilDateModel();
 		p = new Properties();
+		endp = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
+		endp.put("text.today", "Today");
+		endp.put("text.month", "Month");
+		endp.put("text.year", "Year");
 		datePanel = new JDatePanelImpl(model, p);
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		endDatePanel = new JDatePanelImpl(endModel, endp);
+		endDatePicker = new JDatePickerImpl(endDatePanel, new DateLabelFormatter());
 		
 		panel.add(new JLabel("Start Date"), "align label");
-		panel.add(datePicker);
+		panel.add(datePicker, "wrap");
+		panel.add(new JLabel("End Date"), "align label");
+		panel.add(endDatePicker);
 
-		//endDatePicker = new JDatePickerImpl(datePanel, new DateFormatter());
-		//endDatePicker.setBounds(220,350,120,30);
-
-		// this next line is a workaround, if something breaks in the UI its probably because of this
-		//panel.add(new JLabel(""), "wrap");  
-		//panel.add(new JLabel("End Date"), "align label");
-		//panel.add(endDatePicker);
 
 		return panel;
 	}
@@ -155,14 +154,10 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		c.setPriceDaily(Double.parseDouble(priceDaily.getText()));
 		c.setPriceHalfDay(Double.parseDouble(priceHalfDay.getText()));
 		
-		//TODO add start and end dates
-		c.setStartDate((Date)datePicker.getModel().getValue());
-		this.startDate = (Date)datePicker.getModel().getValue();
 		
-		//c.setEndDate(fhkssdh);
-
-		//c.setCamper_id(Integer.parseInt(camper_id.getText()));
-
+		c.setStartDate((Date)datePicker.getModel().getValue());
+		c.setEndDate((Date)endDatePicker.getModel().getValue());
+		
 		return c;
 	}
 
@@ -172,10 +167,6 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
 		priceDaily.setText(String.valueOf(c.getPriceDaily()));
 		priceHalfDay.setText(String.valueOf(c.getPriceHalfDay()));
-		//startDate.setDateFormat((Date) c.getStartDate());
-		//start date
-		//end date
-		//camper_id.setText(String.valueOf(c.getCamper_id()));
 	}
 
 	private boolean isEmptyFieldData() {
@@ -202,7 +193,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				}
 				if (bean.create(c) != null)
 					JOptionPane.showMessageDialog(null,
-							"New person created successfully.");
+							"New camp created successfully.");
 				createButton.setText("New...");
 				break;
 			case "New":
@@ -254,15 +245,4 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 			}
 		}
 	}
-
-	/*
-	public void actionPerformed(ActionEvent e) {
-		if(startCheck==e.getSource())
-	    {
-	    java.sql.Date selectedStartDate = (java.sql.Date) startDatePicker.getModel().getValue();
-	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	    Date reportStartDate = df.format(selectedStartDate.getTime());
-	    JOptionPane.showMessageDialog(null,reportStartDate);
-	    }
-	}*/
 }
