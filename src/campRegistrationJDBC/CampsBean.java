@@ -122,7 +122,7 @@ public class CampsBean {
 
 		try {
 			rowSet.first();
-			//c.setId(rowSet.getInt("id"));
+			c.setId(rowSet.getInt("id"));
 			c.setName(rowSet.getString("name"));
 			c.setPriceWeekly(rowSet.getDouble("priceWeekly"));
 			c.setPriceDaily(rowSet.getDouble("priceDaily"));
