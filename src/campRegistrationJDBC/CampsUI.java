@@ -61,13 +61,13 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	private CampsBean bean = new CampsBean();
 
 	//declarations for datepicker
-	UtilDateModel model, endModel; 
-	Properties p, endp;
+	private UtilDateModel model, endModel; 
+	private Properties p, endp;
 	
-	JDatePanelImpl datePanel; 
-	JDatePickerImpl datePicker;
-	JDatePanelImpl endDatePanel; 
-	JDatePickerImpl endDatePicker;
+	private JDatePanelImpl datePanel; 
+	private JDatePickerImpl datePicker;
+	private JDatePanelImpl endDatePanel; 
+	private JDatePickerImpl endDatePicker;
 	
 	public CampsUI()
 	{

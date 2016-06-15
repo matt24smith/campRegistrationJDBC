@@ -1,0 +1,5 @@
+KNOWN BUGS
+
+Condition: 			Try to create camp record with empty date field
+Result:				NullPointerException
+Intended Result:	Window Pops up to inform user of empty field
