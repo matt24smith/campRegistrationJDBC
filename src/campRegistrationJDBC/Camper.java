@@ -10,6 +10,16 @@ public class Camper {
 	private Date 	registrationDate;
 	private double 	amountPaid;
 	private String 	notes;
+	
+	
+	
+	public java.sql.Date getSqlRegDate()
+	{
+		java.sql.Date sqlDate = new java.sql.Date(this.getRegistrationDate().getTime());
+		return sqlDate;
+	}
+	
+	
 	/**
 	 * @return the id
 	 */

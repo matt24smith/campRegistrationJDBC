@@ -240,13 +240,21 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 										+ " is deleted successfully"));
 				break;
 			case "<-- First":
-				setFieldData(bean.moveFirst()); break;
+				setFieldData(bean.moveFirst()); 
+				createButton.setText("New");
+				break;
 			case "<- Previous":
-				setFieldData(bean.movePrevious()); break;
+				setFieldData(bean.movePrevious()); 
+				createButton.setText("New");
+				break;
 			case "Next ->":
-				setFieldData(bean.moveNext()); break;
+				setFieldData(bean.moveNext()); 
+				createButton.setText("New");
+				break;
 			case "Last -->":
-				setFieldData(bean.moveLast()); break;
+				setFieldData(bean.moveLast()); 
+				createButton.setText("New");
+				break;
 			default:
 				JOptionPane.showMessageDialog(null,
 						"invalid command");

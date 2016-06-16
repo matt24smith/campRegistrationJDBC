@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -24,12 +25,17 @@ import org.jdatepicker.impl.UtilDateModel;
 
 public class CamperUI extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6225361288314703557L;
 	private JTextField idField = new JTextField(11);
 	private JTextField fnameField = new JTextField(30);
 	private JTextField lnameField = new JTextField(30);
 	private JTextField lunchesOrderedField = new JTextField(3);
 	private JTextField amountPaidField = new JTextField(8);
-	private JTextField notesField = new JTextField(2000);
+	private JTextArea notesField = new JTextArea(4,40);
+	
 
 	private CamperBean bean = new CamperBean();
 
@@ -90,6 +96,7 @@ public class CamperUI extends JPanel{
 		panel.setLayout(new MigLayout());
 		panel.add(new JLabel("ID"), "align label");
 		panel.add(idField, "wrap");
+		idField.setEditable(false);
 		panel.add(new JLabel("First Name"), "align label");
 		panel.add(fnameField, "wrap");
 		panel.add(new JLabel("Last Name"), "align label");
@@ -109,6 +116,10 @@ public class CamperUI extends JPanel{
 
 		panel.add(new JLabel("Registered On"), "align label");
 		panel.add(datePicker, "wrap");
+		
+		panel.add(new JLabel("Notes"), "align label");
+		panel.add(notesField, "wrap");
+		//notesField.setSize(100, 40);
 
 		return panel;
 	}
@@ -156,7 +167,7 @@ public class CamperUI extends JPanel{
 			switch (e.getActionCommand()){
 			case "Save":
 				if (isEmptyFieldData()){
-					JOptionPane.showMessageDialog(null, "Cannot create an empty record");
+					JOptionPane.showMessageDialog(null, "Error 1: Cannot create an empty record");
 					return;
 				}
 				if (bean.create(c) != null)
@@ -169,13 +180,15 @@ public class CamperUI extends JPanel{
 				c.setLname("");
 				c.setLunchesOrdered(0);
 				//TODO questionable choice of code below 
-				datePicker.getModel().setValue(null);
+				//datePicker.getModel().setValue(null);
 				c.setAmountPaid(0.0);
 				c.setNotes("");
-
+				setFieldData(c);
+				createButton.setText("Save");
+				break;
 			case "Update":
 				if (isEmptyFieldData()) {
-					JOptionPane.showMessageDialog(null, "Cannot create empty record");
+					JOptionPane.showMessageDialog(null, "Error 2: Cannot create empty record");
 					return;
 				}
 				if (bean.update(c) != null)
@@ -191,13 +204,21 @@ public class CamperUI extends JPanel{
 				JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been deleted successfully.");
 				break;
 			case "<-- First":
-				setFieldData(bean.moveFirst()); break;
+				setFieldData(bean.moveFirst()); 
+				createButton.setText("New");
+				break;
 			case "<- Previous":
-				setFieldData(bean.movePrevious()); break;
+				setFieldData(bean.movePrevious()); 
+				createButton.setText("New");
+				break;
 			case "Next ->":
-				setFieldData(bean.moveNext()); break;
+				setFieldData(bean.moveNext()); 
+				createButton.setText("New");
+				break;
 			case "Last -->":
-				setFieldData(bean.moveLast()); break;
+				setFieldData(bean.moveLast()); 
+				createButton.setText("New");
+				break;
 			default:
 				JOptionPane.showMessageDialog(null,
 						"invalid command");

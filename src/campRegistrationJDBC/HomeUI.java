@@ -65,7 +65,7 @@ public class HomeUI extends JPanel{
 				q.getContentPane().add(new CamperUI());
 
 
-				q.setSize(600, 280);
+				q.setSize(600, 350);
 				q.setVisible(true);
 				break;
 			default:
