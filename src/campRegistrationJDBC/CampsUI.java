@@ -168,7 +168,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private void setFieldData(Camps c) {
 		// ... yup
-		idField.setText(String.valueOf(	String.valueOf(c.getId())	));
+		idField.setText(String.valueOf(	c.getId()));
 		nameField.setText(c.getName());
 		priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
 		priceDaily.setText(String.valueOf(c.getPriceDaily()));
@@ -177,6 +177,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private boolean isEmptyFieldData() {
 		// is it empty?
+		
+		//TODO check this and fix the requirements
 		
 		return (nameField.getText().trim().isEmpty()
 				&& priceWeekly.getText().trim().isEmpty()
@@ -201,7 +203,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				if (bean.create(c) != null)
 					JOptionPane.showMessageDialog(null,
 							"New camp created successfully.");
-				createButton.setText("New...");
+				createButton.setText("New");
 				break;
 			case "New":
 				c.setId(new Random()
@@ -221,7 +223,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				}
 				if (bean.update(c) != null)
 					JOptionPane.showMessageDialog(
-							null,"Person with ID:" + String.valueOf(c.getId()
+							null,"Camp " + String.valueOf(c.getName()
 									+ " is updated successfully"));
 				break;
 			case "Delete":
@@ -233,8 +235,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				c = bean.getCurrent();
 				bean.delete();
 				JOptionPane.showMessageDialog(
-						null,"Person with ID:"
-								+ String.valueOf(c.getId()
+						null,"Camp "
+								+ String.valueOf(c.getName()
 										+ " is deleted successfully"));
 				break;
 			case "<-- First":

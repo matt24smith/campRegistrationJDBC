@@ -61,11 +61,8 @@ public class HomeUI extends JPanel{
 				JFrame q=new JFrame();
 				//do not exit on close
 				//q.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//q.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
-
-				// TODO fix this when campersUI is done
-
-				//q.getContentPane().add(new CampersUI());
+				q.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+				q.getContentPane().add(new CamperUI());
 
 
 				q.setSize(600, 280);

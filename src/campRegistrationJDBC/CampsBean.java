@@ -58,10 +58,8 @@ public class CampsBean {
 			rowSet.updateDouble("priceWeekly", c.getPriceWeekly());
 			rowSet.updateDouble("priceDaily", c.getPriceDaily());
 			rowSet.updateDouble("priceHalfDay", c.getPriceHalfDay());
-			java.sql.Date sqlStartDate = new java.sql.Date(c.getStartDate().getTime());
-			rowSet.updateDate("startDate", sqlStartDate);
-			java.sql.Date sqlEndDate = new java.sql.Date(c.getEndDate().getTime());
-			rowSet.updateDate("endDate", sqlEndDate);
+			rowSet.updateDate("startDate", c.getSqlStartDate());
+			rowSet.updateDate("endDate", c.getSqlEndDate());
 			rowSet.insertRow();
 			rowSet.moveToCurrentRow();  
 		}
@@ -88,10 +86,8 @@ public class CampsBean {
 			rowSet.updateDouble("priceWeekly", c.getPriceWeekly());
 			rowSet.updateDouble("priceDaily", c.getPriceDaily());
 			rowSet.updateDouble("priceHalfDay", c.getPriceHalfDay());
-			java.sql.Date sqlStartDate = new java.sql.Date(c.getStartDate().getTime());
-			rowSet.updateDate("startDate", sqlStartDate);
-			java.sql.Date sqlEndDate = new java.sql.Date(c.getEndDate().getTime());
-			rowSet.updateDate("endDate", sqlEndDate);
+			rowSet.updateDate("startDate", c.getSqlStartDate());
+			rowSet.updateDate("endDate", c.getSqlEndDate());
 			
 		} catch (SQLException ex) {
 			try {

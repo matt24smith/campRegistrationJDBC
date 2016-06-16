@@ -10,12 +10,25 @@ public class Camps {
 	private double	priceDaily;
 	private double	priceHalfDay;
 	private Date	startDate;
+	java.sql.Date 	sqlStartDate;
 	private Date	endDate;
+	java.sql.Date	sqlEndDate;
 	private int 	camper_id;
 	
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
+	public java.sql.Date getSqlStartDate()
+	{
+		java.sql.Date sqlDate = new java.sql.Date(this.getStartDate().getTime());
+		return sqlDate;
+	}
+	
+	public java.sql.Date getSqlEndDate()
+	{
+		java.sql.Date sqlDate = new java.sql.Date(this.getEndDate().getTime());
+		return sqlDate;
+	}
 	
 	/**
 	 * @return the id

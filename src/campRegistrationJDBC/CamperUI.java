@@ -1,11 +1,16 @@
 package campRegistrationJDBC;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -78,7 +83,7 @@ public class CamperUI extends JPanel{
 
 		return panel;
 	}
-	
+
 	private JPanel initFields()
 	{
 		JPanel panel = new JPanel();
@@ -93,7 +98,7 @@ public class CamperUI extends JPanel{
 		panel.add(lunchesOrderedField, "wrap");
 		panel.add(new JLabel("Amount Paid"), "align label");
 		panel.add(amountPaidField, "wrap");
-		
+
 		model = new UtilDateModel();
 		p = new Properties();
 		p.put("text.today", "Today");
@@ -101,13 +106,13 @@ public class CamperUI extends JPanel{
 		p.put("text.year", "Year");
 		datePanel = new JDatePanelImpl(model, p);
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		
+
 		panel.add(new JLabel("Registered On"), "align label");
 		panel.add(datePicker, "wrap");
-		
+
 		return panel;
 	}
-	
+
 	private Camper getFieldData()
 	{
 		Camper c = new Camper();
@@ -117,9 +122,89 @@ public class CamperUI extends JPanel{
 		c.setLunchesOrdered(Integer.parseInt(lunchesOrderedField.getText()));
 		c.setAmountPaid(Double.parseDouble(amountPaidField.getText()));
 		c.setNotes(notesField.getText());
-		
+
 		c.setRegistrationDate((Date) datePicker.getModel().getValue());
-		
+
 		return c;
+	}
+
+	private void setFieldData(Camper c)
+	{
+		idField.setText(String.valueOf(c.getId()));
+		fnameField.setText(c.getFname());
+		lnameField.setText(c.getLname());
+		lunchesOrderedField.setText(String.valueOf(c.getLunchesOrdered()));
+		amountPaidField.setText(String.valueOf(c.getAmountPaid()));
+		notesField.setText(c.getNotes());
+
+		//TODO get the datepicker to show the actual value, or at least some workaround
+		//datePicker.getModel().setDate(c.getRegistrationDate().getYear(), c.getRegistrationDate().getMonth(), c.getRegistrationDate().getDay());
+	}
+
+	private boolean isEmptyFieldData()
+	{
+		return (fnameField.getText().trim().isEmpty() 
+				|| lnameField.getText().trim().isEmpty() 
+				|| lunchesOrderedField.getText().trim().isEmpty()
+				|| amountPaidField.getText().trim().isEmpty()
+				);
+	}
+
+	private class ButtonHandler implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			Camper c = getFieldData();
+			switch (e.getActionCommand()){
+			case "Save":
+				if (isEmptyFieldData()){
+					JOptionPane.showMessageDialog(null, "Cannot create an empty record");
+					return;
+				}
+				if (bean.create(c) != null)
+					JOptionPane.showMessageDialog(null, "New Camper info stored successfully.");
+				createButton.setText("New");
+				break;
+			case "New":
+				c.setId(new Random().nextInt(Integer.MAX_VALUE) + 1);
+				c.setFname("");
+				c.setLname("");
+				c.setLunchesOrdered(0);
+				//TODO questionable choice of code below 
+				datePicker.getModel().setValue(null);
+				c.setAmountPaid(0.0);
+				c.setNotes("");
+
+			case "Update":
+				if (isEmptyFieldData()) {
+					JOptionPane.showMessageDialog(null, "Cannot create empty record");
+					return;
+				}
+				if (bean.update(c) != null)
+					JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been added updated successfully.");
+				break;
+			case "Delete":
+				if (isEmptyFieldData() ) {
+					JOptionPane.showMessageDialog(null, "Cannot delete an empty record.");
+					return;
+				}
+				c = bean.getCurrent();
+				bean.delete();
+				JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been deleted successfully.");
+				break;
+			case "<-- First":
+				setFieldData(bean.moveFirst()); break;
+			case "<- Previous":
+				setFieldData(bean.movePrevious()); break;
+			case "Next ->":
+				setFieldData(bean.moveNext()); break;
+			case "Last -->":
+				setFieldData(bean.moveLast()); break;
+			default:
+				JOptionPane.showMessageDialog(null,
+						"invalid command");
+
+			}
+		}
+
+
 	}
 }
