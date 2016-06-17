@@ -108,7 +108,7 @@ public class CampsBean {
 		try {
 			rowSet.moveToCurrentRow();
 			if (rowSet.isFirst() == true && rowSet.isLast() == true){
-				 if (printMessage == true) JOptionPane.showMessageDialog(null, "Error 3b: Cannot delete the only camp in the database!\nAdd a new camper before deleting any more.");
+				 if (printMessage == true) JOptionPane.showMessageDialog(null, "Error 3b: Cannot delete the only camp in the database!\nAdd a new camp before deleting any more.");
 				 Thread.dumpStack();
 				 return false;
 			}

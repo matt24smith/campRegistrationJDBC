@@ -1,7 +1,6 @@
 package campRegistrationJDBC;
 
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import javax.sql.rowset.JdbcRowSet;
 import javax.swing.JOptionPane;
@@ -41,8 +40,11 @@ public class CamperBean {
 
 			// create sql object from java Date
 			//java.sql.Date sqlRegDate = new java.sql.Date(c.getRegistrationDate().getTime());
-			rowSet.updateDate("registrationDate", c.getSqlRegDate());
-			
+			try {
+				rowSet.updateDate("registrationDate", c.getSqlRegDate());
+			} catch (NullPointerException ex) {
+				ex.printStackTrace();
+			}
 
 			rowSet.updateString("notes", c.getNotes());
 
@@ -61,53 +63,41 @@ public class CamperBean {
 
 	}
 
-	public Camper update(Camper c) {
+	public Camper update(Camper c, boolean printMessage) {
 		// updates a record
 		try {
-			
-			/*
-			//rowSet.moveToInsertRow();
-			rowSet.updateInt("id", c.getId());
-			rowSet.updateString("fname", c.getFname());
-			rowSet.updateString("lname", c.getLname());
-			rowSet.updateInt("lunchesOrdered", c.getLunchesOrdered());
-			rowSet.updateDate("registrationDate", c.getSqlRegDate());
-			rowSet.updateDate("registrationDate", c.getSqlRegDate());
-
-			rowSet.updateString("notes", c.getNotes());
-			
-			//rowSet.moveToCurrentRow();
-			 * 
-			 * 
-			 */
-			
-			
 			rowSet.moveToCurrentRow();
-			delete();
-			rowSet.moveToInsertRow();
-			create(c);
+			
+			if (delete(false) == false){
+				rowSet.moveToInsertRow();		
+				JOptionPane.showMessageDialog(null, "Cannot update last camper.\nUse the \"New\" button to create a new camper before updating this one.");
+				create(c);		
+				printMessage = false;
+			} else {
+				rowSet.moveToInsertRow();
+				create(c);
+			} 
+			
 
 		} catch (SQLException ex) {
 			try {
 				rowSet.rollback();
 			} catch (SQLException e) {
-
+				e.printStackTrace();
 			}
 			ex.printStackTrace();
 		}
+		if (printMessage == true) JOptionPane.showMessageDialog(null, "Camp has been updated successfully.");
 		return c;
 	}
 
-	public boolean delete() {
-		// deletes a record
-		
-		
-		
+	public boolean delete(boolean printMessage) {
 		try {
 			rowSet.moveToCurrentRow();
 			if (rowSet.isFirst() == true && rowSet.isLast() == true){
 				
-				JOptionPane.showMessageDialog(null, "Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");
+				if (printMessage == true) JOptionPane.showMessageDialog(null, "Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");				
+				Thread.dumpStack();
 				return false;
 			}
 			
@@ -120,6 +110,8 @@ public class CamperBean {
 			}
 			ex.printStackTrace();
 		}
+		
+		if (printMessage == true) JOptionPane.showMessageDialog(null, "Camper has been deleted successfully.");
 			return true;
 	}
 

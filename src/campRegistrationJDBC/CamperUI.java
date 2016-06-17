@@ -182,8 +182,7 @@ public class CamperUI extends JPanel{
 				c.setFname("");
 				c.setLname("");
 				c.setLunchesOrdered(0);
-				//TODO questionable choice of code below 
-				//datePicker.getModel().setValue(null);
+				datePicker.getJFormattedTextField().setText("");
 				c.setAmountPaid(0.0);
 				c.setNotes("");
 				setFieldData(c);
@@ -195,8 +194,7 @@ public class CamperUI extends JPanel{
 					JOptionPane.showMessageDialog(null, "Error 2: Cannot create empty record");
 					return;
 				}
-				if (bean.update(c) != null)
-					JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been added updated successfully.");
+				bean.update(c, true);
 				break;
 			case "Delete":
 				if (isEmptyFieldData() ) {
@@ -204,10 +202,7 @@ public class CamperUI extends JPanel{
 					return;
 				}
 				c = bean.getCurrent();
-				if (bean.delete() == true)
-				{
-					JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been deleted successfully.");
-				}
+				bean.delete(true);
 				break;
 			case "<-- First":
 				setFieldData(bean.moveFirst()); 
