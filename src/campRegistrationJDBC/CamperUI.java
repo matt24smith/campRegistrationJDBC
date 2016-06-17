@@ -204,8 +204,10 @@ public class CamperUI extends JPanel{
 					return;
 				}
 				c = bean.getCurrent();
-				bean.delete();
-				JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been deleted successfully.");
+				if (bean.delete() == true)
+				{
+					JOptionPane.showMessageDialog(null, "Camper " + c.getFname() + " has been deleted successfully.");
+				}
 				break;
 			case "<-- First":
 				setFieldData(bean.moveFirst()); 

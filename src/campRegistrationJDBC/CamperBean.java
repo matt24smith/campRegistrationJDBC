@@ -1,7 +1,11 @@
 package campRegistrationJDBC;
 
 import java.sql.SQLException;
+import java.util.Calendar;
+
 import javax.sql.rowset.JdbcRowSet;
+import javax.swing.JOptionPane;
+
 import com.sun.rowset.JdbcRowSetImpl;
 
 public class CamperBean {
@@ -94,10 +98,20 @@ public class CamperBean {
 		return c;
 	}
 
-	public void delete() {
+	public boolean delete() {
 		// deletes a record
+		
+		
+		
 		try {
 			rowSet.moveToCurrentRow();
+			if (rowSet.isFirst() == true && rowSet.isLast() == true){
+				
+				JOptionPane.showMessageDialog(null, "Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");
+				return false;
+			}
+			
+			//rowSet.moveToCurrentRow(); moved above
 			rowSet.deleteRow();
 		} catch (SQLException ex) {
 			try {
@@ -106,13 +120,28 @@ public class CamperBean {
 			}
 			ex.printStackTrace();
 		}
-
+			return true;
 	}
 
 	public Camper moveFirst() {
 		Camper c = new Camper();
 
+		
 		try {
+			/*if (rowSet.first() == false){
+				
+				rowSet.moveToInsertRow();
+				create(c);
+				c.setId(rowSet.getInt("id"));
+				c.setFname(rowSet.getString("fname"));
+				c.setLname(rowSet.getString("lname"));
+				c.setLunchesOrdered(rowSet.getInt("lunchesOrdered"));
+				c.setRegistrationDate(rowSet.getDate("registrationDate"));
+				c.setAmountPaid(rowSet.getDouble("amountPaid"));
+				c.setNotes(rowSet.getString("notes"));
+				update(c);
+			*/	
+			//}	else {
 			rowSet.first();
 			c.setId(rowSet.getInt("id"));
 			c.setFname(rowSet.getString("fname"));
@@ -121,6 +150,10 @@ public class CamperBean {
 			c.setRegistrationDate(rowSet.getDate("registrationDate"));
 			c.setAmountPaid(rowSet.getDouble("amountPaid"));
 			c.setNotes(rowSet.getString("notes"));
+			
+			
+				
+			//}
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
