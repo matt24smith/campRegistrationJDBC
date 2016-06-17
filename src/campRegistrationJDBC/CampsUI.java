@@ -237,11 +237,10 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 					return;
 				}
 				c = bean.getCurrent();
-				bean.delete();
-				JOptionPane.showMessageDialog(
-						null,"Camp "
-								+ String.valueOf(c.getName()
-										+ " is deleted successfully"));
+				if (bean.delete() == true)
+				{
+					JOptionPane.showMessageDialog(null, "Camp " + c.getName() + " has been deleted successfully.");
+				}
 				break;
 			case "<-- First":
 				setFieldData(bean.moveFirst()); 

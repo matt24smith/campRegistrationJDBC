@@ -10,6 +10,7 @@ package campRegistrationJDBC;
 import java.sql.SQLException;
 
 import javax.sql.rowset.JdbcRowSet;
+import javax.swing.JOptionPane;
 
 import com.sun.rowset.JdbcRowSetImpl;
 
@@ -110,10 +111,15 @@ public class CampsBean {
 		return c;
 	}
 
-	public void delete(){
+	public boolean delete(){
 		//deletes a record
 		try {
 			rowSet.moveToCurrentRow();
+			if (rowSet.isFirst() == true && rowSet.isLast() == true){
+				 JOptionPane.showMessageDialog(null, "Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");
+				 return false;
+			}
+			
 			rowSet.deleteRow();
 		} catch (SQLException ex) {
 			try {
@@ -121,6 +127,7 @@ public class CampsBean {
 			} catch (SQLException e) { }
 			ex.printStackTrace();
 		}
+		return true;
 	}
 
 	public Camps moveFirst(){
