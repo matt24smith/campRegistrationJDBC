@@ -225,10 +225,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 							"Cannot update an empty record");
 					return;
 				}
-				if (bean.update(c) != null)
-					JOptionPane.showMessageDialog(
-							null,"Camp " + String.valueOf(c.getName()
-									+ " is updated successfully"));
+				bean.update(c, true);
 				break;
 			case "Delete":
 				if (isEmptyFieldData()) {
@@ -237,10 +234,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 					return;
 				}
 				c = bean.getCurrent();
-				if (bean.delete() == true)
-				{
-					JOptionPane.showMessageDialog(null, "Camp " + c.getName() + " has been deleted successfully.");
-				}
+				bean.delete(true);
+				
 				break;
 			case "<-- First":
 				setFieldData(bean.moveFirst()); 

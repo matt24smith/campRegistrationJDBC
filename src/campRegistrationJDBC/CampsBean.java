@@ -70,7 +70,7 @@ public class CampsBean {
 				rowSet.rollback();
 				c = null;
 			} catch (SQLException e) {
-
+				e.printStackTrace();
 			}
 			ex.printStackTrace();
 		}
@@ -78,27 +78,18 @@ public class CampsBean {
 
 	}
 
-	public Camps update (Camps c)
+	public Camps update (Camps c, boolean printMessage)
 	{
 		//updates a record
 		try {
-			/*
-			 * rowSet.updateInt("id", c.getId());
-			 
-			rowSet.updateString("name", c.getName());
-			rowSet.updateDouble("priceWeekly", c.getPriceWeekly());
-			rowSet.updateDouble("priceDaily", c.getPriceDaily());
-			rowSet.updateDouble("priceHalfDay", c.getPriceHalfDay());
-			rowSet.updateDate("startDate", c.getSqlStartDate());
-			rowSet.updateDate("endDate", c.getSqlEndDate());
-			*/
-			
-			//Much simpler
-			
 			rowSet.moveToCurrentRow();
-			delete();
-			rowSet.moveToInsertRow();
-			create(c);
+			if (delete(false) == false){
+				JOptionPane.showMessageDialog(null, "Cannot update last camp.\nUse the \"New\" button to create a new camp before updating this one.");
+				printMessage = false;
+			} else {
+				rowSet.moveToInsertRow();
+				create(c);
+			}
 			
 		} catch (SQLException ex) {
 			try {
@@ -108,15 +99,17 @@ public class CampsBean {
 			}
 			ex.printStackTrace();
 		}
+		if (printMessage == true) JOptionPane.showMessageDialog(null, "Camp has been updated successfully.");
 		return c;
 	}
 
-	public boolean delete(){
+	public boolean delete(boolean printMessage){
 		//deletes a record
 		try {
 			rowSet.moveToCurrentRow();
 			if (rowSet.isFirst() == true && rowSet.isLast() == true){
-				 JOptionPane.showMessageDialog(null, "Error 3b: Cannot delete the only camp in the database!\nAdd a new camper before deleting any more.");
+				 if (printMessage == true) JOptionPane.showMessageDialog(null, "Error 3b: Cannot delete the only camp in the database!\nAdd a new camper before deleting any more.");
+				 Thread.dumpStack();
 				 return false;
 			}
 			
@@ -127,6 +120,8 @@ public class CampsBean {
 			} catch (SQLException e) { }
 			ex.printStackTrace();
 		}
+		
+		if (printMessage == true) JOptionPane.showMessageDialog(null, "Camp has been deleted successfully.");
 		return true;
 	}
 
