@@ -106,7 +106,7 @@ public class CamperBean {
 		try {
 			rowSet.moveToCurrentRow();
 			if (rowSet.isFirst() == true && rowSet.isLast() == true){
-				
+				//
 				JOptionPane.showMessageDialog(null, "Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");
 				return false;
 			}
