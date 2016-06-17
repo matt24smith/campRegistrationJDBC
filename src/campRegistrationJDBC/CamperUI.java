@@ -119,7 +119,9 @@ public class CamperUI extends JPanel{
 		
 		panel.add(new JLabel("Notes"), "align label");
 		panel.add(notesField, "wrap");
-		//notesField.setSize(100, 40);
+		notesField.setLineWrap(true);
+		notesField.setWrapStyleWord(true);
+		
 
 		return panel;
 	}
@@ -147,6 +149,7 @@ public class CamperUI extends JPanel{
 		lunchesOrderedField.setText(String.valueOf(c.getLunchesOrdered()));
 		amountPaidField.setText(String.valueOf(c.getAmountPaid()));
 		notesField.setText(c.getNotes());
+		datePicker.getJFormattedTextField().setText(c.getRegistrationDate().toString());
 
 		//TODO get the datepicker to show the actual value, or at least some workaround
 		//datePicker.getModel().setDate(c.getRegistrationDate().getYear(), c.getRegistrationDate().getMonth(), c.getRegistrationDate().getDay());
@@ -185,6 +188,7 @@ public class CamperUI extends JPanel{
 				c.setNotes("");
 				setFieldData(c);
 				createButton.setText("Save");
+				datePicker.getJFormattedTextField().setText("");
 				break;
 			case "Update":
 				if (isEmptyFieldData()) {

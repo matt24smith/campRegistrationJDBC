@@ -173,6 +173,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
 		priceDaily.setText(String.valueOf(c.getPriceDaily()));
 		priceHalfDay.setText(String.valueOf(c.getPriceHalfDay()));
+		datePicker.getJFormattedTextField().setText(c.getStartDate().toString());
+		endDatePicker.getJFormattedTextField().setText(c.getStartDate().toString());
 	}
 
 	private boolean isEmptyFieldData() {
@@ -213,6 +215,8 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				c.setPriceDaily(32);
 				c.setPriceHalfDay(20);
 				setFieldData(c);
+				datePicker.getJFormattedTextField().setText("");
+				endDatePicker.getJFormattedTextField().setText("");
 				createButton.setText("Save");
 				break;
 			case "Update":

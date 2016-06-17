@@ -81,13 +81,23 @@ public class CampsBean {
 	{
 		//updates a record
 		try {
-			rowSet.updateInt("id", c.getId());
+			/*
+			 * rowSet.updateInt("id", c.getId());
+			 
 			rowSet.updateString("name", c.getName());
 			rowSet.updateDouble("priceWeekly", c.getPriceWeekly());
 			rowSet.updateDouble("priceDaily", c.getPriceDaily());
 			rowSet.updateDouble("priceHalfDay", c.getPriceHalfDay());
 			rowSet.updateDate("startDate", c.getSqlStartDate());
 			rowSet.updateDate("endDate", c.getSqlEndDate());
+			*/
+			
+			//Much simpler
+			
+			rowSet.moveToCurrentRow();
+			delete();
+			rowSet.moveToInsertRow();
+			create(c);
 			
 		} catch (SQLException ex) {
 			try {

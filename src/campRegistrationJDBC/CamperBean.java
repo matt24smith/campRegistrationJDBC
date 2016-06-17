@@ -36,8 +36,9 @@ public class CamperBean {
 			rowSet.updateInt("lunchesOrdered", c.getLunchesOrdered());
 
 			// create sql object from java Date
-			java.sql.Date sqlRegDate = new java.sql.Date(c.getRegistrationDate().getTime());
-			rowSet.updateDate("registrationDate", sqlRegDate);
+			//java.sql.Date sqlRegDate = new java.sql.Date(c.getRegistrationDate().getTime());
+			rowSet.updateDate("registrationDate", c.getSqlRegDate());
+			
 
 			rowSet.updateString("notes", c.getNotes());
 
@@ -59,14 +60,28 @@ public class CamperBean {
 	public Camper update(Camper c) {
 		// updates a record
 		try {
-			rowSet.moveToInsertRow();
+			
+			/*
+			//rowSet.moveToInsertRow();
 			rowSet.updateInt("id", c.getId());
 			rowSet.updateString("fname", c.getFname());
 			rowSet.updateString("lname", c.getLname());
 			rowSet.updateInt("lunchesOrdered", c.getLunchesOrdered());
 			rowSet.updateDate("registrationDate", c.getSqlRegDate());
+			rowSet.updateDate("registrationDate", c.getSqlRegDate());
 
 			rowSet.updateString("notes", c.getNotes());
+			
+			//rowSet.moveToCurrentRow();
+			 * 
+			 * 
+			 */
+			
+			
+			rowSet.moveToCurrentRow();
+			delete();
+			rowSet.moveToInsertRow();
+			create(c);
 
 		} catch (SQLException ex) {
 			try {
