@@ -37,6 +37,7 @@ public class CamperBean {
 			rowSet.updateString("fname", c.getFname());
 			rowSet.updateString("lname", c.getLname());
 			rowSet.updateInt("lunchesOrdered", c.getLunchesOrdered());
+			rowSet.updateDouble("amountPaid", c.getAmountPaid());
 
 			// create sql object from java Date
 			//java.sql.Date sqlRegDate = new java.sql.Date(c.getRegistrationDate().getTime());
