@@ -1,6 +1,8 @@
 package campRegistrationJDBC;
 
+import java.awt.List;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.rowset.JdbcRowSet;
 import javax.swing.JOptionPane;
@@ -29,7 +31,7 @@ public class Camps2CampersBean {
 	}
 
 	public Camps2Campers create(Camps2Campers c) {
-		//creates a new camp to camper relation 
+		// creates a new camp to camper relation
 		try {
 			rowSet.moveToInsertRow();
 			rowSet.updateInt("campId", c.getCampId());
@@ -72,5 +74,28 @@ public class Camps2CampersBean {
 		if (printMessage == true)
 			JOptionPane.showMessageDialog(null, "Camper has been removed from registration.");
 		return true;
+	}
+
+	public String[] getCamperNames() {	
+		ArrayList<String> camperNames = new ArrayList<String>();
+
+		try {
+			rowSet.setCommand("SELECT * FROM campers");
+			rowSet.execute();
+			rowSet.first();
+			//System.out.println(rowSet.getString(3) + ", " + rowSet.getString(2));
+			camperNames.add(rowSet.getString(3) + ", " + rowSet.getString(2));
+			while (rowSet.next()) {
+				//System.out.println(rowSet.getString(3) + ", " + rowSet.getString(2));
+				camperNames.add(rowSet.getString(3) + ", " + rowSet.getString(2));
+			}
+
+			rowSet.setCommand("SELECT * FROM camps2campers");
+			rowSet.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return camperNames.toArray(new String[camperNames.size()]);
 	}
 }
