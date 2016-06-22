@@ -29,6 +29,7 @@ email VARCHAR(128)
 CREATE TABLE camps2campers(
 campId VARCHAR(6) NOT NULL DEFAULT "",
 camperId VARCHAR(6) NOT NULL DEFAULT "",
+registrationDiscount DECIMAL(6,2),
 CONSTRAINT pk_camps2campers PRIMARY KEY (campId,camperId)
 );
 

@@ -92,6 +92,7 @@ public class CamperUI extends JPanel{
 
 	private JPanel initFields()
 	{
+		//initializes input fields
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		panel.add(new JLabel("ID"), "align label");
@@ -128,6 +129,7 @@ public class CamperUI extends JPanel{
 
 	private Camper getFieldData()
 	{
+		//retrieves data from input fields
 		Camper c = new Camper();
 		c.setId(Integer.parseInt(idField.getText()));
 		c.setFname(fnameField.getText());
@@ -143,6 +145,7 @@ public class CamperUI extends JPanel{
 
 	private void setFieldData(Camper c)
 	{
+		//sets the input field data to default values 
 		idField.setText(String.valueOf(c.getId()));
 		fnameField.setText(c.getFname());
 		lnameField.setText(c.getLname());
@@ -157,6 +160,7 @@ public class CamperUI extends JPanel{
 
 	private boolean isEmptyFieldData()
 	{
+		//checks if the field is empty
 		return (fnameField.getText().trim().isEmpty() 
 				|| lnameField.getText().trim().isEmpty() 
 				|| lunchesOrderedField.getText().trim().isEmpty()

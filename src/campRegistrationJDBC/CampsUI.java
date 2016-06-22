@@ -173,8 +173,16 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
 		priceDaily.setText(String.valueOf(c.getPriceDaily()));
 		priceHalfDay.setText(String.valueOf(c.getPriceHalfDay()));
+		
+		try {
 		datePicker.getJFormattedTextField().setText(c.getStartDate().toString());
-		endDatePicker.getJFormattedTextField().setText(c.getStartDate().toString());
+		endDatePicker.getJFormattedTextField().setText(c.getEndDate().toString());
+		} catch(NullPointerException n) {
+				datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
+				endDatePicker.getJFormattedTextField().setText(endDatePicker.getModel().getYear() + "-" + endDatePicker.getModel().getMonth() + "-" + endDatePicker.getModel().getDay() );
+				//n.printStackTrace();
+		}
+		
 	}
 
 	private boolean isEmptyFieldData() {
@@ -183,9 +191,11 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		//TODO check this and fix the requirements
 		
 		return (nameField.getText().trim().isEmpty()
-				&& priceWeekly.getText().trim().isEmpty()
-				&& priceDaily.getText().trim().isEmpty()
-				&& priceHalfDay.getText().trim().isEmpty()
+				|| priceWeekly.getText().trim().isEmpty()
+				|| priceDaily.getText().trim().isEmpty()
+				|| priceHalfDay.getText().trim().isEmpty()
+				|| datePicker.getModel().getValue() == null
+				|| endDatePicker.getModel().getValue() == null
 				);
 	}
 

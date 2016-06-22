@@ -15,6 +15,7 @@ public class Camper {
 	
 	public java.sql.Date getSqlRegDate()
 	{
+		//returns the date in a format compatible with MySQL DB
 		return new java.sql.Date(this.getRegistrationDate().getTime());
 	}
 	
