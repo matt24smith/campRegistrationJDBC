@@ -1,6 +1,18 @@
 ########################	README		########################
 
-If you are reading this, you are probably a potential employer 
-or are checking out my code for some reason or other. The app
-isn't done at the time of this commit, but I assure you it will
-be action packed, and very exciting. 
+This is a GUI front end for a camp registration database to be
+employed at CKEC. Both the applet and database were designed
+and implemented by Matt Smith.
+This applet is designed to replace a 10 year old monolithic
+spreadsheet of data, and ideally being as user friendly as
+possible to accommodate less technologically inclined staff
+members here at CKEC.
+
+FEATURES (At time of last commit):
+Allows adding and modifying of summer camps
+Allows adding and modifying campers and camper info
+
+FEATURES TO BE IMPLEMENTED:
+Modifying camp and camper relationships
+Adding and modifying parent information
+Modifying parent relationships to campers
