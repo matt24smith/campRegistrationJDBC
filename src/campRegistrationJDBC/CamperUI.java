@@ -35,7 +35,7 @@ public class CamperUI extends JPanel{
 	private JTextField lunchesOrderedField = new JTextField(3);
 	private JTextField amountPaidField = new JTextField(8);
 	private JTextArea notesField = new JTextArea(4,40);
-	
+
 
 	private CamperBean bean = new CamperBean();
 
@@ -117,12 +117,12 @@ public class CamperUI extends JPanel{
 
 		panel.add(new JLabel("Registered On"), "align label");
 		panel.add(datePicker, "wrap");
-		
+
 		panel.add(new JLabel("Notes"), "align label");
 		panel.add(notesField, "wrap");
 		notesField.setLineWrap(true);
 		notesField.setWrapStyleWord(true);
-		
+
 
 		return panel;
 	}
@@ -152,10 +152,12 @@ public class CamperUI extends JPanel{
 		lunchesOrderedField.setText(String.valueOf(c.getLunchesOrdered()));
 		amountPaidField.setText(String.valueOf(c.getAmountPaid()));
 		notesField.setText(c.getNotes());
-		datePicker.getJFormattedTextField().setText(c.getRegistrationDate().toString());
 
-		//TODO get the datepicker to show the actual value, or at least some workaround
-		//datePicker.getModel().setDate(c.getRegistrationDate().getYear(), c.getRegistrationDate().getMonth(), c.getRegistrationDate().getDay());
+		try {
+			datePicker.getJFormattedTextField().setText(c.getRegistrationDate().toString());
+		} catch (NullPointerException n) {
+			datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
+		}
 	}
 
 	private boolean isEmptyFieldData()

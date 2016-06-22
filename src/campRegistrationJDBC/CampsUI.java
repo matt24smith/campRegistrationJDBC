@@ -40,7 +40,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	 */
 
 
-	
+
 	private static final long serialVersionUID = 1L;
 	//textfield declarations
 	private JTextField idField = new JTextField(11);
@@ -63,12 +63,12 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	//declarations for datepicker
 	private UtilDateModel model, endModel; 
 	private Properties p, endp;
-	
+
 	private JDatePanelImpl datePanel; 
 	private JDatePickerImpl datePicker;
 	private JDatePanelImpl endDatePanel; 
 	private JDatePickerImpl endDatePicker;
-	
+
 	public CampsUI()
 	{
 		setBorder(new TitledBorder
@@ -82,7 +82,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	private JPanel initButtons()
 	{
 		//initializes the buttons on the screen
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
 
@@ -108,7 +108,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 	private JPanel initFields()
 	{
 		//initializes any sort of input field, including date pickers
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		panel.add(new JLabel("ID"), "align label");
@@ -139,7 +139,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		endDatePanel = new JDatePanelImpl(endModel, endp);
 		endDatePicker = new JDatePickerImpl(endDatePanel, new DateLabelFormatter());
-		
+
 		panel.add(new JLabel("Start Date"), "align label");
 		panel.add(datePicker, "wrap");
 		panel.add(new JLabel("End Date"), "align label");
@@ -151,18 +151,18 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private Camps getFieldData() {
 		//the method names are pretty self descriptive. 
-		
+
 		Camps c = new Camps();
 		c.setId(Integer.parseInt(idField.getText()));
 		c.setName(nameField.getText());
 		c.setPriceWeekly(Double.parseDouble(priceWeekly.getText()));
 		c.setPriceDaily(Double.parseDouble(priceDaily.getText()));
 		c.setPriceHalfDay(Double.parseDouble(priceHalfDay.getText()));
-		
-		
+
+
 		c.setStartDate((Date)datePicker.getModel().getValue());
 		c.setEndDate((Date)endDatePicker.getModel().getValue());
-		
+
 		return c;
 	}
 
@@ -173,23 +173,23 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		priceWeekly.setText(String.valueOf(c.getPriceWeekly()));
 		priceDaily.setText(String.valueOf(c.getPriceDaily()));
 		priceHalfDay.setText(String.valueOf(c.getPriceHalfDay()));
-		
+
 		try {
-		datePicker.getJFormattedTextField().setText(c.getStartDate().toString());
-		endDatePicker.getJFormattedTextField().setText(c.getEndDate().toString());
+			datePicker.getJFormattedTextField().setText(c.getStartDate().toString());
+			endDatePicker.getJFormattedTextField().setText(c.getEndDate().toString());
 		} catch(NullPointerException n) {
-				datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
-				endDatePicker.getJFormattedTextField().setText(endDatePicker.getModel().getYear() + "-" + endDatePicker.getModel().getMonth() + "-" + endDatePicker.getModel().getDay() );
-				//n.printStackTrace();
+			datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
+			endDatePicker.getJFormattedTextField().setText(endDatePicker.getModel().getYear() + "-" + endDatePicker.getModel().getMonth() + "-" + endDatePicker.getModel().getDay() );
+			//n.printStackTrace();
 		}
-		
+
 	}
 
 	private boolean isEmptyFieldData() {
 		// is it empty?
-		
+
 		//TODO check this and fix the requirements
-		
+
 		return (nameField.getText().trim().isEmpty()
 				|| priceWeekly.getText().trim().isEmpty()
 				|| priceDaily.getText().trim().isEmpty()
@@ -201,7 +201,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 
 	private class ButtonHandler implements ActionListener {
 		// BUTTONS!
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Camps c = getFieldData();
@@ -245,7 +245,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 				}
 				c = bean.getCurrent();
 				bean.delete(true);
-				
+
 				break;
 			case "<-- First":
 				setFieldData(bean.moveFirst()); 
