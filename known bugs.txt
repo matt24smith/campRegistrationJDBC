@@ -1,1 +1,1 @@
-ALL BUGS CLEAR AT TIME OF COMMIT 2016/06/22 :)
+Should not be able to delete camper while they are still registered for a camp
