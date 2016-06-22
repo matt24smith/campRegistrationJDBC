@@ -13,8 +13,8 @@ public class Camps2CampersBean {
 	static final String DB_USER = "matt";
 	static final String DB_PASS = "Creative2016";
 	private JdbcRowSet rowSet = null;
-	
-	public Camps2CampersBean(){
+
+	public Camps2CampersBean() {
 		try {
 			Class.forName(JDBC_DRIVER);
 			rowSet = new JdbcRowSetImpl();
@@ -27,8 +27,9 @@ public class Camps2CampersBean {
 			ex.printStackTrace();
 		}
 	}
-	
-	public Camps2Campers create (Camps2Campers c){
+
+	public Camps2Campers create(Camps2Campers c) {
+		//creates a new camp to camper relation 
 		try {
 			rowSet.moveToInsertRow();
 			rowSet.updateInt("campId", c.getCampId());
@@ -45,10 +46,11 @@ public class Camps2CampersBean {
 		}
 		return c;
 	}
-	
-	public boolean delete (boolean printMessage){
-		//deletes the relation from the DB.
-		//If printmessage == true, it will display a status message about the delete operation
+
+	public boolean delete(boolean printMessage) {
+		// deletes the relation from the DB.
+		// If printmessage == true, it will display a status message about the
+		// delete operation
 		try {
 			rowSet.moveToCurrentRow();
 			if (rowSet.isFirst() == true && rowSet.isLast() == true) {

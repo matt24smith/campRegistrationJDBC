@@ -1,9 +1,9 @@
 ########################    README    ########################
 
 This is a GUI front end for a camp registration database to be
-employed at CKEC. Both the applet and database were designed
+employed at CKEC. Both the servlet and database were designed
 and implemented by Matt Smith.
-This applet is designed to replace a 10 year old monolithic
+This servlet is designed to replace a 10 year old monolithic
 spreadsheet of data, and ideally being as user friendly as
 possible to accommodate less technologically inclined staff
 members here at CKEC.
