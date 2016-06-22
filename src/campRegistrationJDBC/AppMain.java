@@ -20,5 +20,7 @@ public class AppMain {
 	      f.getContentPane().add(new HomeUI());
 	      f.setSize(600, 280);
 	      f.setVisible(true);
+	      Camps2CampersBean c = new Camps2CampersBean();
+	      c.getCamperNames();
 	   }
 }
