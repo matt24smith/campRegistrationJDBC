@@ -158,8 +158,6 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 		c.setPriceWeekly(Double.parseDouble(priceWeekly.getText()));
 		c.setPriceDaily(Double.parseDouble(priceDaily.getText()));
 		c.setPriceHalfDay(Double.parseDouble(priceHalfDay.getText()));
-
-
 		c.setStartDate((Date)datePicker.getModel().getValue());
 		c.setEndDate((Date)endDatePicker.getModel().getValue());
 
@@ -178,17 +176,15 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 			datePicker.getJFormattedTextField().setText(c.getStartDate().toString());
 			endDatePicker.getJFormattedTextField().setText(c.getEndDate().toString());
 		} catch(NullPointerException n) {
+			//fixing this bug was a major pain in the rear. Don't mess this part up
 			datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
 			endDatePicker.getJFormattedTextField().setText(endDatePicker.getModel().getYear() + "-" + endDatePicker.getModel().getMonth() + "-" + endDatePicker.getModel().getDay() );
-			//n.printStackTrace();
 		}
 
 	}
 
 	private boolean isEmptyFieldData() {
 		// is it empty?
-
-		//TODO check this and fix the requirements
 
 		return (nameField.getText().trim().isEmpty()
 				|| priceWeekly.getText().trim().isEmpty()
@@ -209,7 +205,7 @@ public class CampsUI extends JPanel /*implements ActionListener */{
 			case "Save":
 				if (isEmptyFieldData()) {
 					JOptionPane.showMessageDialog(null,
-							"Cannot create an empty record");
+							"Cannot create an empty record./nPlease check to ensure all input boxes are filled.");
 					return;
 				}
 				if (bean.create(c) != null)

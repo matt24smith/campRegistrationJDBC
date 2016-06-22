@@ -156,6 +156,7 @@ public class CamperUI extends JPanel{
 		try {
 			datePicker.getJFormattedTextField().setText(c.getRegistrationDate().toString());
 		} catch (NullPointerException n) {
+			//fixing this bug was a major pain in the rear. Don't mess this part up
 			datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
 		}
 	}
@@ -176,7 +177,7 @@ public class CamperUI extends JPanel{
 			switch (e.getActionCommand()){
 			case "Save":
 				if (isEmptyFieldData()){
-					JOptionPane.showMessageDialog(null, "Error 1: Cannot create an empty record");
+					JOptionPane.showMessageDialog(null, "Cannot create an empty record./nPlease check to ensure all input boxes are filled.");
 					return;
 				}
 				if (bean.create(c) != null)
