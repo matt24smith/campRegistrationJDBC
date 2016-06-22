@@ -23,7 +23,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-public class CamperUI extends JPanel{
+public class CamperUI extends JPanel {
 
 	/**
 	 * 
@@ -34,8 +34,7 @@ public class CamperUI extends JPanel{
 	private JTextField lnameField = new JTextField(30);
 	private JTextField lunchesOrderedField = new JTextField(3);
 	private JTextField amountPaidField = new JTextField(8);
-	private JTextArea notesField = new JTextArea(4,40);
-
+	private JTextArea notesField = new JTextArea(4, 40);
 
 	private CamperBean bean = new CamperBean();
 
@@ -44,33 +43,28 @@ public class CamperUI extends JPanel{
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
 
-	//button declarations
-	private JButton createButton = new JButton ("New");
-	private JButton updateButton = new JButton ("Update");
-	private JButton deleteButton = new JButton ("Delete");
-	private JButton firstButton = new JButton ("<-- First");
-	private JButton prevButton = new JButton ("<- Previous");
-	private JButton nextButton = new JButton ("Next ->");
-	private JButton lastButton = new JButton ("Last -->");
+	// button declarations
+	private JButton createButton = new JButton("New");
+	private JButton updateButton = new JButton("Update");
+	private JButton deleteButton = new JButton("Delete");
+	private JButton firstButton = new JButton("<-- First");
+	private JButton prevButton = new JButton("<- Previous");
+	private JButton nextButton = new JButton("Next ->");
+	private JButton lastButton = new JButton("Last -->");
 
-
-	public CamperUI()
-	{
-		setBorder(new TitledBorder
-				(new EtchedBorder(),"Camper Details"));
+	public CamperUI() {
+		setBorder(new TitledBorder(new EtchedBorder(), "Camper Details"));
 		setLayout(new BorderLayout(5, 5));
 		add(initFields(), BorderLayout.NORTH);
 		add(initButtons(), BorderLayout.CENTER);
 		setFieldData(bean.moveFirst());
 	}
 
-	private JPanel initButtons()
-	{
-		//initializes the buttons on the screen
+	private JPanel initButtons() {
+		// initializes the buttons on the screen
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
-
 
 		panel.add(createButton);
 		createButton.addActionListener(new ButtonHandler());
@@ -90,9 +84,8 @@ public class CamperUI extends JPanel{
 		return panel;
 	}
 
-	private JPanel initFields()
-	{
-		//initializes input fields
+	private JPanel initFields() {
+		// initializes input fields
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		panel.add(new JLabel("ID"), "align label");
@@ -123,13 +116,11 @@ public class CamperUI extends JPanel{
 		notesField.setLineWrap(true);
 		notesField.setWrapStyleWord(true);
 
-
 		return panel;
 	}
 
-	private Camper getFieldData()
-	{
-		//retrieves data from input fields
+	private Camper getFieldData() {
+		// retrieves data from input fields
 		Camper c = new Camper();
 		c.setId(Integer.parseInt(idField.getText()));
 		c.setFname(fnameField.getText());
@@ -143,9 +134,8 @@ public class CamperUI extends JPanel{
 		return c;
 	}
 
-	private void setFieldData(Camper c)
-	{
-		//sets the input field data to default values 
+	private void setFieldData(Camper c) {
+		// sets the input field data to default values
 		idField.setText(String.valueOf(c.getId()));
 		fnameField.setText(c.getFname());
 		lnameField.setText(c.getLname());
@@ -156,28 +146,27 @@ public class CamperUI extends JPanel{
 		try {
 			datePicker.getJFormattedTextField().setText(c.getRegistrationDate().toString());
 		} catch (NullPointerException n) {
-			//fixing this bug was a major pain in the rear. Don't mess this part up
-			datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-" + datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay() );
+			// fixing this bug was a major pain in the rear. Don't mess this
+			// part up
+			datePicker.getJFormattedTextField().setText(datePicker.getModel().getYear() + "-"
+					+ datePicker.getModel().getMonth() + "-" + datePicker.getModel().getDay());
 		}
 	}
 
-	private boolean isEmptyFieldData()
-	{
-		//checks if the field is empty
-		return (fnameField.getText().trim().isEmpty() 
-				|| lnameField.getText().trim().isEmpty() 
-				|| lunchesOrderedField.getText().trim().isEmpty()
-				|| amountPaidField.getText().trim().isEmpty()
-				);
+	private boolean isEmptyFieldData() {
+		// checks if the field is empty
+		return (fnameField.getText().trim().isEmpty() || lnameField.getText().trim().isEmpty()
+				|| lunchesOrderedField.getText().trim().isEmpty() || amountPaidField.getText().trim().isEmpty());
 	}
 
-	private class ButtonHandler implements ActionListener{
-		public void actionPerformed(ActionEvent e){
+	private class ButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
 			Camper c = getFieldData();
-			switch (e.getActionCommand()){
+			switch (e.getActionCommand()) {
 			case "Save":
-				if (isEmptyFieldData()){
-					JOptionPane.showMessageDialog(null, "Cannot create an empty record./nPlease check to ensure all input boxes are filled.");
+				if (isEmptyFieldData()) {
+					JOptionPane.showMessageDialog(null,
+							"Cannot create an empty record./nPlease check to ensure all input boxes are filled.");
 					return;
 				}
 				if (bean.create(c) != null)
@@ -204,36 +193,34 @@ public class CamperUI extends JPanel{
 				bean.update(c, true);
 				break;
 			case "Delete":
-				if (isEmptyFieldData() ) {
+				if (isEmptyFieldData()) {
 					JOptionPane.showMessageDialog(null, "Cannot delete an empty record.");
 					return;
 				}
 				c = bean.getCurrent();
 				bean.delete(true);
+				setFieldData(bean.moveNext());
 				break;
 			case "<-- First":
-				setFieldData(bean.moveFirst()); 
+				setFieldData(bean.moveFirst());
 				createButton.setText("New");
 				break;
 			case "<- Previous":
-				setFieldData(bean.movePrevious()); 
+				setFieldData(bean.movePrevious());
 				createButton.setText("New");
 				break;
 			case "Next ->":
-				setFieldData(bean.moveNext()); 
+				setFieldData(bean.moveNext());
 				createButton.setText("New");
 				break;
 			case "Last -->":
-				setFieldData(bean.moveLast()); 
+				setFieldData(bean.moveLast());
 				createButton.setText("New");
 				break;
 			default:
-				JOptionPane.showMessageDialog(null,
-						"invalid command");
+				JOptionPane.showMessageDialog(null, "invalid command");
 
 			}
 		}
-
-
 	}
 }

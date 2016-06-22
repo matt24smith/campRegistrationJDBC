@@ -67,16 +67,16 @@ public class CamperBean {
 		try {
 			rowSet.moveToCurrentRow();
 
-			if (delete(false) == false){
-				rowSet.moveToInsertRow();		
-				JOptionPane.showMessageDialog(null, "Cannot update last camper.\nUse the \"New\" button to create a new camper before updating this one.");
-				create(c);		
+			if (delete(false) == false) {
+				rowSet.moveToInsertRow();
+				JOptionPane.showMessageDialog(null,
+						"Cannot update last camper.\nUse the \"New\" button to create a new camper before updating this one.");
+				create(c);
 				printMessage = false;
 			} else {
 				rowSet.moveToInsertRow();
 				create(c);
-			} 
-
+			}
 
 		} catch (SQLException ex) {
 			try {
@@ -86,21 +86,24 @@ public class CamperBean {
 			}
 			ex.printStackTrace();
 		}
-		if (printMessage == true) JOptionPane.showMessageDialog(null, "Camper has been updated successfully.");
+		if (printMessage == true)
+			JOptionPane.showMessageDialog(null, "Camper has been updated successfully.");
 		return c;
 	}
 
 	public boolean delete(boolean printMessage) {
 		try {
 			rowSet.moveToCurrentRow();
-			if (rowSet.isFirst() == true && rowSet.isLast() == true){
+			if (rowSet.isFirst() == true && rowSet.isLast() == true) {
 
-				if (printMessage == true) JOptionPane.showMessageDialog(null, "Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");				
+				if (printMessage == true)
+					JOptionPane.showMessageDialog(null,
+							"Error 3: Cannot delete the only camper in the database!\nAdd a new camper before deleting any more.");
 				Thread.dumpStack();
 				return false;
 			}
 
-			//rowSet.moveToCurrentRow(); //moved above
+			// rowSet.moveToCurrentRow(); //moved above
 			rowSet.deleteRow();
 		} catch (SQLException ex) {
 			try {
@@ -110,29 +113,28 @@ public class CamperBean {
 			ex.printStackTrace();
 		}
 
-		if (printMessage == true) JOptionPane.showMessageDialog(null, "Camper has been deleted successfully.");
+		if (printMessage == true)
+			JOptionPane.showMessageDialog(null, "Camper has been deleted successfully.");
 		return true;
 	}
 
 	public Camper moveFirst() {
 		Camper c = new Camper();
 
-
 		try {
-			/*if (rowSet.first() == false){
-
-				rowSet.moveToInsertRow();
-				create(c);
-				c.setId(rowSet.getInt("id"));
-				c.setFname(rowSet.getString("fname"));
-				c.setLname(rowSet.getString("lname"));
-				c.setLunchesOrdered(rowSet.getInt("lunchesOrdered"));
-				c.setRegistrationDate(rowSet.getDate("registrationDate"));
-				c.setAmountPaid(rowSet.getDouble("amountPaid"));
-				c.setNotes(rowSet.getString("notes"));
-				update(c);
-			 */	
-			//}	else {
+			/*
+			 * if (rowSet.first() == false){
+			 * 
+			 * rowSet.moveToInsertRow(); create(c);
+			 * c.setId(rowSet.getInt("id"));
+			 * c.setFname(rowSet.getString("fname"));
+			 * c.setLname(rowSet.getString("lname"));
+			 * c.setLunchesOrdered(rowSet.getInt("lunchesOrdered"));
+			 * c.setRegistrationDate(rowSet.getDate("registrationDate"));
+			 * c.setAmountPaid(rowSet.getDouble("amountPaid"));
+			 * c.setNotes(rowSet.getString("notes")); update(c);
+			 */
+			// } else {
 			rowSet.first();
 			c.setId(rowSet.getInt("id"));
 			c.setFname(rowSet.getString("fname"));
@@ -142,7 +144,7 @@ public class CamperBean {
 			c.setAmountPaid(rowSet.getDouble("amountPaid"));
 			c.setNotes(rowSet.getString("notes"));
 
-			//}
+			// }
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
