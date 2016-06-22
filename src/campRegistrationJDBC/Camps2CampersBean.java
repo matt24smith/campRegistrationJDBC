@@ -1,6 +1,5 @@
 package campRegistrationJDBC;
 
-import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -97,5 +96,28 @@ public class Camps2CampersBean {
 		}
 
 		return camperNames.toArray(new String[camperNames.size()]);
+	}
+	
+	public String[] getCampNames() {	
+		ArrayList<String> campNames = new ArrayList<String>();
+
+		try {
+			rowSet.setCommand("SELECT * FROM camps");
+			rowSet.execute();
+			rowSet.first();
+			//System.out.println(rowSet.getString(2));
+			campNames.add(rowSet.getString(2));
+			while (rowSet.next()) {
+				//System.out.println(rowSet.getString(2));
+				campNames.add(rowSet.getString(2));
+			}
+
+			rowSet.setCommand("SELECT * FROM camps2campers");
+			rowSet.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return campNames.toArray(new String[campNames.size()]);
 	}
 }
